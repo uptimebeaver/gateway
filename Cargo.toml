@@ -1,0 +1,32 @@
+[package]
+name = "service-template" # TODO: Change name
+version = "0.1.0"
+authors = ["AltF2 <contact@altf2.dev>"]
+edition = "2021"
+readme = "README.md"
+license = "GPL-3.0"
+
+[profile.release]
+lto = "thin"
+
+[dependencies]
+anyhow = "1.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3.11", features = ["env-filter"] }
+tonic = "0.7.2"
+tokio = { version = "1.19.2", features = ["macros", "rt-multi-thread"] }
+dotenv = "0.15.0"
+sea-orm = { version = "0.8.0", features = ["sqlx-postgres", "runtime-tokio-native-tls", "macros"] }
+prost = "0.10"
+
+migration = { path = "./migration" }
+entity = { path = "./entity" }
+utils = { git = "https://github.com/uptimebeaver/utils.git" }
+
+[dev-dependencies.cargo-husky]
+version = "1"
+default-features = false
+features = ["run-for-all", "precommit-hook", "run-cargo-test", "run-cargo-clippy", "run-cargo-fmt"]
+
+[build-dependencies]
+tonic-build = { version = "0.7",  features = ["prost"] }
