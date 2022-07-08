@@ -1,9 +1,10 @@
 use anyhow::Result;
+use poem::{listener::TcpListener, Route, Server};
+use poem_openapi::OpenApiService;
 use std::env;
-use tonic::transport::Server;
 use tracing::{info, warn};
 
-use service_template::services::greeter::GreeterService; // TODO: Change me
+use uptimebeaver_gateway::api::health::Health;
 use utils::database::{DataBase, DB};
 
 #[tokio::main]
@@ -13,22 +14,16 @@ async fn main() -> Result<()> {
 
     utils::logging::setup(env::var("RUST_LOG")?)?;
 
-    info!("setting up database");
-
-    let db = DataBase::from_uri(env::var("DATABASE_URL")?).await?;
-    DB.set(db).expect("unable to set DB");
-
-    info!("finished setting up database");
-
     info!("starting service.");
 
     let port = env::var("PORT")?;
-    let addr = format!("[::]:{}", port).parse()?;
+    let addr = format!("127.0.0.1:{}", port);
+    let oas_addr = format!("http://localhost:{}/api", port);
 
-    Server::builder()
-        .add_service(GreeterService::create_server()) // TODO: Change me
-        .serve(addr)
-        .await?;
+    let api_service = OpenApiService::new((Health), "UptimeBeaver API", "1.0").server(&oas_addr);
+    let ui = api_service.swagger_ui();
+
+    Server::new(TcpListener::bind(addr.as_str())).run(Route::new().nest("/api", api_service).nest("/", ui)).await?;
 
     warn!("quitting service");
 

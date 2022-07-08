@@ -32,6 +32,6 @@ FROM debian:bullseye-slim AS runner
 
 WORKDIR /app
 
-COPY --from=builder /src/target/release/service-template /usr/local/bin/service-template
+COPY --from=builder /src/target/release/uptimebeaver-gateway /usr/local/bin/uptimebeaver-gateway
 
-CMD ["service-template"]
+CMD ["uptimebeaver-gateway"]

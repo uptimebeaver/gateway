@@ -1,5 +1,5 @@
 [package]
-name = "service-template" # TODO: Change name
+name = "uptimebeaver-gateway"
 version = "0.1.0"
 authors = ["AltF2 <contact@altf2.dev>"]
 edition = "2021"
@@ -16,12 +16,11 @@ tracing-subscriber = { version = "0.3.11", features = ["env-filter"] }
 tonic = "0.7.2"
 tokio = { version = "1.19.2", features = ["macros", "rt-multi-thread"] }
 dotenv = "0.15.0"
-sea-orm = { version = "0.8.0", features = ["sqlx-postgres", "runtime-tokio-native-tls", "macros"] }
 prost = "0.10"
 
-migration = { path = "./migration" }
-entity = { path = "./entity" }
 utils = { git = "https://github.com/uptimebeaver/utils.git" }
+poem = { version = "1.3.32", features = ["anyhow", "tokio-native-tls"] }
+poem-openapi = { version = "2.0.2", features = ["swagger-ui"] }
 
 [dev-dependencies.cargo-husky]
 version = "1"

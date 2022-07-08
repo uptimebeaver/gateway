@@ -1,11 +1,11 @@
 <div align="center">
 
-# Template
+# UptimeBeaver Gateway
 
-**Template for Uptime Beaver Repositories.**
+**Gateway for UptimeBeaver Services**
 
-[![GitHub](https://img.shields.io/github/license/uptimebeaver/service-template)](https://github.com/uptimebeaver/service-template/blob/main/LICENSE.md)
-[![Dependency Status](https://deps.rs/repo/github/uptimebeaver/service-template/status.svg)](https://deps.rs/repo/github/uptimebeaver/service-template)
+[![GitHub](https://img.shields.io/github/license/uptimebeaver/gateway)](https://github.com/uptimebeaver/gateway/blob/main/LICENSE.md)
+[![Dependency Status](https://deps.rs/repo/github/uptimebeaver/gateway/status.svg)](https://deps.rs/repo/github/uptimebeaver/gateway)
 
 </div>
 
